@@ -1,0 +1,24 @@
+{
+    "name": "@org/ui",
+    "version": "1.0.0",
+    "license": "MIT",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./src/index.tsx",
+            "import": "./src/index.tsx"
+        }
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.build.json",
+        "clean": "rm -rf node_modules dist .turbo",
+        "prepublishOnly": "pnpm run build"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.15",
+        "react": "^18.2.0"
+    }
+}

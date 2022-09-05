@@ -1,0 +1,30 @@
+{
+    "name": "@org/remix-server",
+    "version": "1.0.0",
+    "license": "MIT",
+    "workspaces": [
+        "packages/*",
+        "apps/*"
+    ],
+    "scripts": {
+        "clean": "turbo run clean && rm -rf node_modules",
+        "build": "turbo run build",
+        "serve": "turbo run serve",
+        "dev": "turbo run dev --parallel",
+        "lint": "turbo run lint",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    },
+    "devDependencies": {
+        "@org/eslint-config": "workspace:*",
+        "prettier": "latest",
+        "turbo": "latest",
+        "typescript": "^4.8.2"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "dependencies": {
+        "express": "^4.18.1",
+        "payload": "^1.0.27"
+    }
+}

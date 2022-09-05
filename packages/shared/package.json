@@ -1,0 +1,27 @@
+{
+    "name": "@org/shared",
+    "version": "1.0.0",
+    "license": "MIT",
+    "main": "./src/index.ts",
+    "exports": {
+        ".": {
+            "serve": {
+                "types": "./dist/index.js",
+                "require": "./dist/index.js",
+                "import": "./dist/index.js"
+            },
+            "default": {
+                "types": "./src/index.ts",
+                "require": "./src/index.ts",
+                "import": "./src/index.ts"
+            }
+        }
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.build.json",
+        "clean": "rm -rf node_modules dist .turbo"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.1"
+    }
+}

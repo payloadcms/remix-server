@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2021"],
+        "module": "NodeNext",
+        "target": "ES2021",
+        "sourceMap": true,
+        "declaration": true,
+        "noEmitOnError": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "noEmit": false
+    },
+    "exclude": ["node_modules", "dist", "build", ".turbo"]
+}

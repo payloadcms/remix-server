@@ -1,0 +1,51 @@
+{
+    "name": "@org/cms",
+    "description": "Payload CMS instance",
+    "version": "1.0.0",
+    "license": "MIT",
+    "types": "./src/index.ts",
+    "exports": {
+        ".": {
+            "serve": {
+                "types": "./dist/index.js",
+                "require": "./dist/index.js",
+                "import": "./dist/index.js"
+            },
+            "default": {
+                "types": "./src/index.ts",
+                "require": "./src/index.ts",
+                "import": "./src/index.ts"
+            }
+        }
+    },
+    "scripts": {
+        "clean": "rm -rf node_modules dist build .turbo",
+        "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload build",
+        "build:server": "rm -rf dist/* && tsc -p ./tsconfig.build.json",
+        "build": "pnpm copyfiles && pnpm build:payload && pnpm build:server",
+        "serve": "copyfiles -u 1 \"build/**/*\" ../server/build",
+        "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" build/",
+        "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload generate:types",
+        "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/config.ts payload generate:graphQLSchema"
+    },
+    "dependencies": {
+        "payload": "^1.0.27",
+        "@org/ui": "workspace:*"
+    },
+    "devDependencies": {
+        "@org/shared": "workspace:*",
+        "@types/express": "^4.17.9",
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.6",
+        "ts-node": "^9.1.1",
+        "copyfiles": "^2.4.1",
+        "typescript": "^4.8.2"
+    },
+    "peerDependencies": {
+        "@org/shared": "workspace:*"
+    },
+    "overrides": {
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    }
+}

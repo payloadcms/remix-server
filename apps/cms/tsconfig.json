@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "lib": ["DOM", "DOM.Iterable", "ES2021"],
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "jsx": "react-jsx"
+    }
+}

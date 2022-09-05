@@ -1,0 +1,32 @@
+{
+    "$schema": "https://turborepo.org/schema.json",
+    "pipeline": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
+        },
+        "build:server": {
+            "dependsOn": ["^build:server"],
+            "outputs": ["dist/**"]
+        },
+        "lint": {
+            "outputs": []
+        },
+        "dev": {
+            "cache": false
+        },
+        "clean": {
+            "cache": false
+        },
+        "serve": {
+            "dependsOn": ["^serve"]
+        }
+    },
+    "globalDependencies": [
+        "$MONGODB_URL",
+        "$PAYLOADCMS_SECRET",
+        "$NODE_ENV",
+        "$PAYLOAD_CONFIG_PATH",
+        "$PORT"
+    ]
+}

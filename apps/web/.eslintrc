@@ -1,0 +1,4 @@
+{
+    "root": true,
+    "extends": ["@org/eslint-config/remix"]
+}
