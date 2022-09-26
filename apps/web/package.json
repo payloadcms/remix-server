@@ -20,21 +20,23 @@
         "dev:remix": "remix watch"
     },
     "dependencies": {
+        "@org/ui": "workspace:*",
         "@remix-run/express": "^1.7.0",
         "@remix-run/node": "^1.7.0",
         "@remix-run/react": "^1.7.0",
-        "@org/ui": "workspace:*",
-        "cross-env": "^7.0.3",
+        "escape-html": "^1.0.3",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "slate": "^0.82.1"
     },
     "devDependencies": {
         "@org/cms": "workspace:*",
         "@remix-run/dev": "^1.7.0",
         "@remix-run/eslint-config": "^1.7.0",
+        "@types/escape-html": "^1.0.2",
+        "@types/express": "^4.17.13",
         "@types/react": "^18.0.15",
         "@types/react-dom": "^18.0.6",
-        "@types/express": "^4.17.13",
         "eslint": "^8.20.0",
         "nodemon": "^2.0.19",
         "npm-run-all": "^4.1.5",

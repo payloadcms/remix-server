@@ -66,8 +66,6 @@ payload.init({
     },
 });
 
-// Scope any web-project specific middlewares and routes to the web project
-
 app.use(payload.authenticate);
 
 app.all(

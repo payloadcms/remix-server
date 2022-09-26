@@ -1,7 +1,7 @@
-import { Payload } from 'payload';
-import { CollectionConfig } from 'payload/types.js';
+import type { CollectionConfig } from 'payload/types';
+import { authenticatedAndAdmin } from '../access/index';
 
-const usersSlug = 'users';
+export const usersSlug = 'users';
 const Users: CollectionConfig = {
     slug: usersSlug,
     auth: true,
@@ -9,7 +9,11 @@ const Users: CollectionConfig = {
         useAsTitle: 'name',
     },
     access: {
-        read: ({ req: { user } }) => Boolean(user),
+        read: authenticatedAndAdmin,
+        admin: authenticatedAndAdmin,
+        create: authenticatedAndAdmin,
+        delete: authenticatedAndAdmin,
+        update: authenticatedAndAdmin,
     },
     fields: [
         {
@@ -33,33 +37,6 @@ const Users: CollectionConfig = {
             ],
         },
     ],
-};
-
-export const seedUsers = async (payload: Payload) => {
-    const { totalDocs } = await payload.find({
-        collection: usersSlug,
-    });
-    if (!totalDocs) {
-        payload.create({
-            collection: usersSlug,
-            data: {
-                email: 'dev@payloadcms.com',
-                password: 'qwerty',
-                name: 'Dev User',
-                role: 'admin',
-            },
-        });
-        payload.create({
-            collection: usersSlug,
-            data: {
-                email: 'user@payloadcms.com',
-                password: 'qwerty',
-                name: 'Frontend User',
-                role: 'user',
-            },
-        });
-        payload.logger.info(`Successfully seeded users into database`);
-    }
 };
 
 export default Users;

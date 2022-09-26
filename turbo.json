@@ -5,10 +5,6 @@
             "dependsOn": ["^build"],
             "outputs": ["dist/**"]
         },
-        "build:server": {
-            "dependsOn": ["^build:server"],
-            "outputs": ["dist/**"]
-        },
         "lint": {
             "outputs": []
         },
@@ -22,11 +18,11 @@
             "dependsOn": ["^serve"]
         }
     },
-    "globalDependencies": [
-        "$MONGODB_URL",
-        "$PAYLOADCMS_SECRET",
-        "$NODE_ENV",
-        "$PAYLOAD_CONFIG_PATH",
-        "$PORT"
+    "globalEnv": [
+        "MONGODB_URL",
+        "PAYLOADCMS_SECRET",
+        "NODE_ENV",
+        "PAYLOAD_CONFIG_PATH",
+        "PORT"
     ]
 }

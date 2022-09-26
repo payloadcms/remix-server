@@ -1,8 +1,12 @@
+import type { Page, User } from '@org/cms';
 import type {
     ErrorBoundaryComponent,
     LinksFunction,
+    LoaderFunction,
     MetaFunction,
+    TypedResponse,
 } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import {
     Links,
     LiveReload,
@@ -12,6 +16,7 @@ import {
     ScrollRestoration,
 } from '@remix-run/react';
 
+import uiStyles from '@org/ui/styles.css';
 import styles from './styles/global.css';
 
 export const meta: MetaFunction = () => ({
@@ -23,9 +28,39 @@ export const meta: MetaFunction = () => ({
 export const links: LinksFunction = () => [
     {
         rel: 'stylesheet',
+        href: uiStyles,
+    },
+    {
+        rel: 'stylesheet',
         href: styles,
     },
 ];
+
+export type RootLoaderData = {
+    pages: Page[];
+    user?: {
+        user?: User;
+        token?: string;
+        exp?: number;
+    };
+};
+export const loader: LoaderFunction = async ({
+    context: { payload, user },
+    request,
+}): Promise<RootLoaderData | TypedResponse<never>> => {
+    const { pathname } = new URL(request.url);
+    if (pathname === '/') {
+        return redirect('/home');
+    }
+
+    const { docs: pages } = await payload.find({
+        collection: 'pages',
+        user,
+        overrideAccess: false,
+    });
+
+    return { pages, user };
+};
 
 export default function App() {
     return (

@@ -1,0 +1,12 @@
+:root {
+    --font-color: rgb(15, 15, 15);
+    --alt-font-color: rgb(154, 154, 154);
+    --level1: rgb(235, 235, 235);
+    --primary-800: rgb(47, 47, 47);
+    --primary-900: rgb(33, 33, 33);
+    --max-width-s: 640px;
+    --max-width-m: 1024px;
+    --max-width-l: 1440px;
+
+    --baseline: 30px;
+}
