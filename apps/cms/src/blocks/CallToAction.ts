@@ -1,25 +1,4 @@
 import type { Block } from 'payload/types';
-import type { Type as Pages } from '../collections/Pages';
-
-export type Button =
-    | {
-          type: 'page';
-          label: string;
-          page: Pages;
-      }
-    | {
-          type: 'custom';
-          label: string;
-          url: string;
-          newTab: boolean;
-      };
-
-export type Type = {
-    blockType: 'cta';
-    blockName?: string;
-    content: unknown;
-    buttons: Button[];
-};
 
 type Data = Record<string, unknown>;
 

@@ -2,27 +2,10 @@ import type { Page } from '@org/cms';
 import { Link } from '@remix-run/react';
 import { RichText } from '../RichText';
 
-export type Button =
-    | {
-          type: 'page';
-          label: string;
-          page: Page;
-      }
-    | {
-          type: 'custom';
-          label: string;
-          url: string;
-          newTab: boolean;
-      };
+type CallToActionProps = Page['layout'][0];
 
-export type CallToActionType = {
-    blockType: 'cta';
-    blockName?: string;
-    content: unknown;
-    buttons: Button[];
-};
-
-export const CallToAction: React.FC<CallToActionType> = (props) => {
+export const CallToAction: React.FC<CallToActionProps> = (props) => {
+    if (props.blockType !== 'cta') return null;
     const { content, buttons } = props;
 
     return (
@@ -33,15 +16,15 @@ export const CallToAction: React.FC<CallToActionType> = (props) => {
                     <ul className="cta-buttons">
                         {buttons.map((button, i) => (
                             <li key={i}>
-                                {button.type === 'page' && (
+                                {typeof button?.page === 'object' && (
                                     <Link
-                                        to={'/' + button.page.slug ?? '/'}
+                                        to={'/' + button?.page?.slug ?? '/'}
                                         className="cta-button"
                                     >
                                         {button.label}
                                     </Link>
                                 )}
-                                {button.type === 'custom' && (
+                                {typeof button?.page === 'string'  && (
                                     <a
                                         className="cta-button"
                                         href={button.url}

@@ -35,7 +35,7 @@
       ]
     },
     {
-      "type": "wide",
+      "type": "feature",
       "blockType": "image",
       "blockName": "Wide Image Demo",
       "image": "{{IMAGE_ID}}",
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "type": "normal",
+      "type": "card",
       "blockType": "image",
       "blockName": "Normal Width Image Demo",
       "image": "{{IMAGE_ID}}",

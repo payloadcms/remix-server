@@ -5,7 +5,6 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Config {}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -65,6 +64,7 @@ export interface Page {
   id: string;
   title: string;
   image?: string | Media;
+  public?: boolean;
   layout: (
     | {
         content?: {
@@ -92,7 +92,7 @@ export interface Page {
       }
     | {
         image: string | Media;
-        type?: 'normal' | 'fullscreen' | 'wide';
+        type: 'card' | 'feature';
         caption?: {
           [k: string]: unknown;
         }[];

@@ -28,7 +28,7 @@ export default function Page() {
     return (
         <main className="page-content container">
             {page?.layout ? (
-                <RenderBlocks layout={page?.layout} />
+                <RenderBlocks layout={page.layout} />
             ) : (
                 'This page seem to be empty'
             )}

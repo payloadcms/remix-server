@@ -1,24 +1,11 @@
 import { CollectionConfig } from 'payload/types';
 import formatSlug from '../utilities/formatSlug';
-import { Image, Type as ImageType } from '../blocks/Image';
-import { CallToAction, Type as CallToActionType } from '../blocks/CallToAction';
-import { Content, Type as ContentType } from '../blocks/Content';
-import { mediaSlug, MediaType } from './Media';
+import { Image } from '../blocks/Image';
+import { CallToAction } from '../blocks/CallToAction';
+import { Content } from '../blocks/Content';
+import { mediaSlug } from './Media';
 import { authenticatedAndAdmin, pageIsPublic } from '../access/index';
 
-export type Layout = CallToActionType | ContentType | ImageType;
-
-export type Type = {
-    title: string;
-    slug: string;
-    image?: MediaType;
-    layout: Layout[];
-    meta: {
-        title?: string;
-        description?: string;
-        keywords?: string;
-    };
-};
 export const pagesSlug = 'pages';
 export const Pages: CollectionConfig = {
     slug: pagesSlug,

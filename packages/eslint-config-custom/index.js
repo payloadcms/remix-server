@@ -26,4 +26,7 @@ module.exports = {
         ecmaVersion: 11,
     },
     plugins: ['react', 'react-hooks', '@typescript-eslint'],
+    rules: {
+        '@typescript-eslint/no-empty-interface': 'off',
+    }
 };

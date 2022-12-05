@@ -1,13 +1,11 @@
 import React from 'react';
 import { components } from '.';
-import type { CallToActionType } from './sections/CallToAction';
-import type { ContentType } from './sections/Content';
-import type { ImageType } from './sections/Image';
+import type { Page } from '@org/cms';
 
-export type Layout = CallToActionType | ContentType | ImageType;
+export type Layout = Page['layout']
 
 type Props = {
-    layout: Layout[];
+    layout: Layout;
     className?: string;
 };
 

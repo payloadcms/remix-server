@@ -1,14 +1,4 @@
 import type { Block } from 'payload/types';
-import type { MediaType } from '../collections/Media';
-
-export type Type = {
-    blockType: 'image';
-    blockName?: string;
-    image: MediaType;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    caption?: any;
-    type: 'normal' | 'wide' | 'fullscreen';
-};
 
 export const Image: Block = {
     slug: 'image',
@@ -31,18 +21,15 @@ export const Image: Block = {
             defaultValue: 'normal',
             options: [
                 {
-                    label: 'Normal',
-                    value: 'normal',
+                    label: 'Card',
+                    value: 'card',
                 },
                 {
-                    label: 'Fullscreen',
-                    value: 'fullscreen',
-                },
-                {
-                    label: 'Wide',
-                    value: 'wide',
+                    label: 'Feature',
+                    value: 'feature',
                 },
             ],
+            required: true,
             admin: {
                 layout: 'horizontal',
             },

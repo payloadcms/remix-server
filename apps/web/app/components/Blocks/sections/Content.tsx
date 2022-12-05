@@ -1,12 +1,9 @@
+import type { Page } from '@org/cms';
 import { RichText } from '../RichText';
 
-export type ContentType = {
-    blockType: 'content';
-    blockName?: string;
-    content: unknown;
-};
-
-export const Content = (props: ContentType) => {
+type ContentTypeProps = Page['layout'][0];
+export const Content = (props: ContentTypeProps) => {
+    if (props.blockType !== 'content') return null;
     const { content } = props;
 
     return (

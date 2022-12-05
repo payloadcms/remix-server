@@ -1,17 +1,12 @@
-import type { MediaType } from '@org/cms/src/collections/Media';
+import type { Page } from '@org/cms';
 import { RichText } from '../RichText';
 import { sizes } from './sizes';
 
-export type ImageType = {
-    blockType: 'image';
-    blockName?: string;
-    image: MediaType;
-    caption?: any;
-    type: 'normal' | 'wide' | 'fullscreen';
-};
+type ImageProps = Page['layout'][0]
 
-export const Image = (props: ImageType) => {
-    const { image, type, caption } = props;
+export const Image = (props: ImageProps) => {
+    if (props.blockType !== 'image') return null;
+    const { image, caption, type } = props;
 
     if (typeof image === 'object') {
         let filenameToRender = image.filename;
@@ -19,7 +14,7 @@ export const Image = (props: ImageType) => {
         let { height } = image;
 
         if (image.sizes[type]) {
-            filenameToRender = image.sizes[type];
+            filenameToRender = image.sizes[type].filename;
             width = image.sizes[type].width;
             height = image.sizes[type].height;
         }

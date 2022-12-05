@@ -9,7 +9,7 @@
         "build:server": "rm -rf dist/* && tsc -p tsconfig.build.json",
         "build": "pnpm build:server",
         "serve": "cross-env PAYLOAD_CONFIG_PATH=../cms/dist/config.js NODE_ENV=production node --conditions=serve dist/index.js",
-        "lint": "eslint --ext .ts,.js ."
+        "lint": "eslint --ext .ts,.js ./index.ts"
     },
     "dependencies": {
         "@org/cms": "workspace:*",
