@@ -26,5 +26,17 @@
     "dependencies": {
         "express": "^4.18.1",
         "payload": "^1.0.27"
+    },
+    "peerDependenciesMeta": {
+        "express": {
+            "optional": true
+        }
+    },
+    "pnpm": {
+        "peerDependencyRules": {
+            "ignoreMissing": [
+                "express"
+            ]
+        }
     }
 }

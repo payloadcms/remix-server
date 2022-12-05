@@ -22,7 +22,7 @@ export default function Page() {
     const { page: pageSlug } = useParams();
 
     const [{ data }] = useMatches();
-    const { pages, user } = data as RootLoaderData;
+    const { pages } = data as RootLoaderData;
     const page = findPageBySlug(pageSlug ?? 'home', pages);
 
     return (

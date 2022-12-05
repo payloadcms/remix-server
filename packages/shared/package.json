@@ -19,7 +19,8 @@
     },
     "scripts": {
         "build": "rm -rf dist && tsc -p tsconfig.build.json",
-        "clean": "rm -rf node_modules dist .turbo"
+        "clean": "rm -rf node_modules dist .turbo",
+        "lint": "eslint --ext .ts,.js./src"
     },
     "dependencies": {
         "dotenv": "^16.0.1"

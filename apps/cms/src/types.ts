@@ -5,6 +5,7 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Config {}
 /**
  * This interface was referenced by `Config`'s JSON-Schema

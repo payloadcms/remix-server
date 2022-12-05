@@ -5,6 +5,7 @@ export type Type = {
     blockType: 'image';
     blockName?: string;
     image: MediaType;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     caption?: any;
     type: 'normal' | 'wide' | 'fullscreen';
 };

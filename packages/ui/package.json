@@ -18,6 +18,7 @@
     "scripts": {
         "build": "rm -rf dist && tsc -p tsconfig.build.json",
         "clean": "rm -rf node_modules dist .turbo",
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src",
         "prepublishOnly": "pnpm run build"
     },
     "peerDependencies": {

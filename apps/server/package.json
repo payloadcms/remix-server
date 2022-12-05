@@ -8,7 +8,8 @@
         "dev": "cross-env PAYLOAD_CONFIG_PATH=../cms/src/config.ts NODE_ENV=development nodemon",
         "build:server": "rm -rf dist/* && tsc -p tsconfig.build.json",
         "build": "pnpm build:server",
-        "serve": "cross-env PAYLOAD_CONFIG_PATH=../cms/dist/config.js NODE_ENV=production node --conditions=serve dist/index.js"
+        "serve": "cross-env PAYLOAD_CONFIG_PATH=../cms/dist/config.js NODE_ENV=production node --conditions=serve dist/index.js",
+        "lint": "eslint --ext .ts,.js ."
     },
     "dependencies": {
         "@org/cms": "workspace:*",

@@ -15,7 +15,6 @@ module.exports = {
     ],
     settings: {
         react: {
-            rootDir: ['apps/*/'],
             version: 'detect',
         },
     },

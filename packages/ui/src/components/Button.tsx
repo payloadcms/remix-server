@@ -46,9 +46,11 @@ const baseStyles: React.CSSProperties = {
 };
 
 type ButtonProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     as?: any;
     size?: Sizes;
     color?: Colors;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [x: string]: any;
 };
 
