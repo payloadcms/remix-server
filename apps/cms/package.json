@@ -23,8 +23,7 @@
         "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload build",
         "build:server": "rm -rf dist/* && tsc -p ./tsconfig.build.json",
         "build": "pnpm build:payload && pnpm build:server && pnpm copyfiles",
-        "serve": "copyfiles -u 1 \"build/**/*\" ../server/build",
-        "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" build/",
+        "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" build/ && copyfiles -u 1 \"build/**/*\" ../server/build",
         "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload generate:types",
         "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/config.ts payload generate:graphQLSchema",
         "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src"
