@@ -18,8 +18,10 @@ const config = buildConfig({
         schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
     },
     onInit: async (payload: Payload) => {
-        await seedUsers(payload);
-        await seedPages(payload);
+        if (process.env.NODE_ENV === 'development') {
+            await seedUsers(payload);
+            await seedPages(payload);
+        }
     },
 });
 

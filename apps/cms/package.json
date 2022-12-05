@@ -22,7 +22,7 @@
         "clean": "rm -rf node_modules dist build .turbo",
         "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload build",
         "build:server": "rm -rf dist/* && tsc -p ./tsconfig.build.json",
-        "build": "pnpm copyfiles && pnpm build:payload && pnpm build:server",
+        "build": "pnpm build:payload && pnpm build:server && pnpm copyfiles",
         "serve": "copyfiles -u 1 \"build/**/*\" ../server/build",
         "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" build/",
         "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload generate:types",
