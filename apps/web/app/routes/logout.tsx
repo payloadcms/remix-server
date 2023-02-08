@@ -5,7 +5,7 @@ export const action: ActionFunction = async ({ context: { res } }) => {
     const cookieOptions = {
         path: '/',
         httpOnly: true,
-        sameSite: 'lax' as 'lax', // Litteral types out of wack, typescript?
+        sameSite: 'lax' as const, // Litteral types out of wack, typescript?
     };
     res.clearCookie('payload-token', cookieOptions);
     return redirect('/');
