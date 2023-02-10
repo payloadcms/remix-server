@@ -1,7 +1,7 @@
-import type { Where } from 'payload/types';
+import type { PayloadRequest, Where } from 'payload/types';
 
-export const authenticatedAndAdmin = ({ req: { user } }) =>
-    user && user?.role === 'admin';
+export const authenticatedAndAdmin = ({ req: { user } }: {req: PayloadRequest}) =>
+    !!user && user?.role === 'admin';
 
 export const pageIsPublic = (): Where => ({
     public: {

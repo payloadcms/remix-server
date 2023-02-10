@@ -1,8 +1,17 @@
 {
-    "extends": "./tsconfig.build.json",
-
     "compilerOptions": {
-        "noEmit": true,
-        "declarationMap": true
-    }
+        "lib": ["DOM", "DOM.Iterable", "ES2021"],
+        "jsx": "react",
+        "module": "NodeNext",
+        "target": "ES2021",
+        "sourceMap": true,
+        "declaration": true,
+        "noEmitOnError": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "noEmit": false
+    },
+    "exclude": ["node_modules", "dist", "build", ".turbo"]
 }

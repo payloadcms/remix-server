@@ -4,14 +4,16 @@
 import type { Response } from 'express';
 import type { Payload, User } from '@org/cms';
 
+export interface RemixRequestContext {
+    payload: Payload;
+    user: {
+        user?: User;
+        token?: string;
+        exp?: number;
+    };
+    res: Response;
+}
+
 declare module '@remix-run/node' {
-    interface AppLoadContext {
-        payload: Payload;
-        user: {
-            user?: User;
-            token?: string;
-            exp?: number;
-        };
-        res: Response;
-    }
+    interface AppLoadContext extends RemixRequestContext {}
 }

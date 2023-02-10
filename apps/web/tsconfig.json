@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["remix.env.d.ts", "express.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist", "build", ".turbo", "public"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2021"],
     "allowJs": true,

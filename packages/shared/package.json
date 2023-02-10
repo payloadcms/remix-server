@@ -18,11 +18,11 @@
         }
     },
     "scripts": {
-        "build": "rm -rf dist && tsc -p tsconfig.build.json",
+        "build": "rm -rf dist && tsc",
         "clean": "rm -rf node_modules dist .turbo",
         "lint": "eslint --ext .ts,.js./src"
     },
     "dependencies": {
-        "dotenv": "^16.0.1"
+        "dotenv": "^16.0.3"
     }
 }

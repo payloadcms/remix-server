@@ -5,6 +5,7 @@ import { mediaSlug } from '../collections/Media';
 import { usersSlug } from '../collections/Users';
 import home from './home-page.json';
 import posts from './posts-page.json';
+import type { Page } from 'payload/generated-types';
 
 export const seedPages = async (payload: Payload) => {
     const { totalDocs } = await payload.find({
@@ -21,7 +22,9 @@ export const seedPages = async (payload: Payload) => {
 
         const createdPostsPage = await payload.create({
             collection: pagesSlug,
-            data: posts,
+            // payload 1.6.9 have incorrect generated types for rich text
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data: posts as any,
         });
 
         const publicString = JSON.stringify(home)
