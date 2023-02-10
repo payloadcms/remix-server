@@ -27,7 +27,7 @@ This monorepo is using `pnpm` for package management. While it is an easy task t
 
 ## Setup
 
-Get started by running `pnpm install` from the root of the monorepo. Create a `/apps/server/.env` file based on `/apps/server/.env.example` and add your connection string to MongoDB as well as a secret for PayloadCMS to use in order to keep your data secure. 
+Get started by running `pnpm install` from the root of the monorepo. Create a `/apps/server/.env.local` file based on `/apps/server/.env` and add your connection string to MongoDB as well as a secret for PayloadCMS to use in order to keep your data secure. `.env` will be loaded first, and then `.env.local`. That way you can keep your non-secret variables in the `.env` files which also is commited to git, and secret variables in `.env.local` that isn't commited to git.
 
 ### Develop
 
