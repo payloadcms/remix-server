@@ -1,7 +1,7 @@
-{
+export default {
     "layout": [
         {
-            "blockType": "content",
+            "blockType": "content" as const,
             "blockName": "Page Content",
             "content": [
                 {
@@ -38,6 +38,6 @@
     ],
     "title": "Posts",
     "public": false,
-    "slug": "posts",
+    "slug": "posts" as const,
     "meta": {}
 }
