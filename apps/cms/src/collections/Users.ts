@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload/types';
 import { authenticatedAndAdmin } from '../access/index';
-import { Select } from '../components/Select';
 
 export const usersSlug = 'users';
 const Users: CollectionConfig = {
@@ -26,11 +25,6 @@ const Users: CollectionConfig = {
             name: 'role',
             type: 'select',
             required: true,
-            admin: {
-                components: {
-                    Field: Select
-                }
-            },
             options: [
                 {
                     label: 'Admin',
