@@ -7,4 +7,7 @@ module.exports = {
     // appDirectory: "app",
     // serverBuildPath: "build/index.js",
     watchPaths: ['../../packages/ui', '../../packages/shared'],
+    future: {
+        v2_errorBoundary: true
+    }
 };

@@ -1,6 +1,5 @@
 import type { Page, User } from '@org/cms';
 import type {
-    ErrorBoundaryComponent,
     LinksFunction,
     LoaderFunction,
     MetaFunction,
@@ -14,6 +13,8 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
+    useRouteError,
+    isRouteErrorResponse,
 } from '@remix-run/react';
 
 import uiStyles from '@org/ui/styles.css';
@@ -89,20 +90,29 @@ export default function App() {
     );
 }
 
-export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
     return (
-        <html lang="en">
-            <head>
-                <Meta />
-                <Links />
-            </head>
-            <body>
-                <div>ERROR: {error.message}</div>
-                <Outlet />
-                <ScrollRestoration />
-                <Scripts />
-                <LiveReload />
-            </body>
-        </html>
+      <div>
+        <h1>Oops</h1>
+        <p>Status: {error.status}</p>
+        <p>{error.data.message}</p>
+      </div>
     );
-};
+  }
+
+  let errorMessage = "Unknown error";
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+
+  return (
+    <div>
+      <h1>Uh oh ...</h1>
+      <p>Something went wrong.</p>
+      <pre>{errorMessage}</pre>
+    </div>
+  );
+}
