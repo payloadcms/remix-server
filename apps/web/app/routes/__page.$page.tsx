@@ -4,7 +4,7 @@ import { RenderBlocks } from '~/components/Blocks';
 import type { RootLoaderData } from '~/root';
 import { findPageBySlug } from '~/utils';
 
-import type { loader as rootLoader } from '../../root';
+import type { loader as rootLoader } from '../root';
 
 export const meta: V2_MetaFunction<any, { root: typeof rootLoader }> = ({
     matches,
