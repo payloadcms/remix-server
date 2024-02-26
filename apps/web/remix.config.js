@@ -8,6 +8,7 @@ module.exports = {
     // serverBuildPath: "build/index.js",
     watchPaths: ['../../packages/ui', '../../packages/shared'],
     future: {
-        v2_errorBoundary: true
+        v2_errorBoundary: true,
+        v2_normalizeFormMethod: true
     }
 };
