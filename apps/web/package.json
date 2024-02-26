@@ -22,9 +22,9 @@
     },
     "dependencies": {
         "@org/ui": "workspace:*",
-        "@remix-run/express": "^1.12.0",
-        "@remix-run/node": "^1.12.0",
-        "@remix-run/react": "^1.12.0",
+        "@remix-run/express": "^1.19.3",
+        "@remix-run/node": "^1.19.3",
+        "@remix-run/react": "^1.19.3",
         "escape-html": "^1.0.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -32,8 +32,8 @@
     },
     "devDependencies": {
         "@org/cms": "workspace:*",
-        "@remix-run/dev": "^1.12.0",
-        "@remix-run/eslint-config": "^1.12.0",
+        "@remix-run/dev": "^1.19.3",
+        "@remix-run/eslint-config": "^1.19.3",
         "@types/escape-html": "^1.0.2",
         "@types/express": "^4.17.17",
         "@types/react": "^18.0.27",
