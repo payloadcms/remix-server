@@ -2,7 +2,7 @@ import type { Page, User } from '@org/cms';
 import type {
     LinksFunction,
     LoaderFunction,
-    MetaFunction,
+    V2_MetaFunction,
     TypedResponse,
 } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
@@ -20,11 +20,13 @@ import {
 import uiStyles from '@org/ui/styles.css';
 import styles from './styles/global.css';
 
-export const meta: MetaFunction = () => ({
-    charset: 'utf-8',
-    title: 'Payload CMS & Remix Monorepo',
-    viewport: 'width=device-width,initial-scale=1',
-});
+export const meta: V2_MetaFunction = () => {
+    return [
+        { charSet: 'utf-8' },
+        { title: 'Payload CMS & Remix Monorepo' },
+        { name: 'viewport', content: 'width=device-width,initial-scale=1' }
+    ];
+};
 
 export const links: LinksFunction = () => [
     {
@@ -49,7 +51,7 @@ export const loader: LoaderFunction = async ({
     context: { payload, user },
     request,
 }): Promise<RootLoaderData | TypedResponse<never>> => {
-    const { pathname } = new URL(request.url);
+   const { pathname } = new URL(request.url);
     if (pathname === '/') {
         return redirect('/home');
     }
@@ -91,28 +93,28 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
+    const error = useRouteError();
 
-  if (isRouteErrorResponse(error)) {
+    if (isRouteErrorResponse(error)) {
+        return (
+            <div>
+                <h1>Oops</h1>
+                <p>Status: {error.status}</p>
+                <p>{error.data.message}</p>
+            </div>
+        );
+    }
+
+    let errorMessage = 'Unknown error';
+    if (error instanceof Error) {
+        errorMessage = error.message;
+    }
+
     return (
-      <div>
-        <h1>Oops</h1>
-        <p>Status: {error.status}</p>
-        <p>{error.data.message}</p>
-      </div>
+        <div>
+            <h1>Uh oh ...</h1>
+            <p>Something went wrong.</p>
+            <pre>{errorMessage}</pre>
+        </div>
     );
-  }
-
-  let errorMessage = "Unknown error";
-  if (error instanceof Error) {
-    errorMessage = error.message;
-  }
-
-  return (
-    <div>
-      <h1>Uh oh ...</h1>
-      <p>Something went wrong.</p>
-      <pre>{errorMessage}</pre>
-    </div>
-  );
 }
