@@ -39,7 +39,7 @@ export const Image: Block = {
             label: 'Caption',
             type: 'richText',
             admin: {
-                elements: ['link'],
+                // elements: ['link'],
             },
         },
     ],

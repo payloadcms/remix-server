@@ -27,8 +27,8 @@ export const seedPages = async (payload: Payload) => {
         });
 
         const publicString = JSON.stringify(home)
-            .replace(/{{IMAGE_ID}}/g, createdMedia.id)
-            .replace(/{{SAMPLE_PAGE_ID}}/g, createdPostsPage.id);
+            .replace(/{{IMAGE_ID}}/g, createdMedia.id.toString())
+            .replace(/{{SAMPLE_PAGE_ID}}/g, createdPostsPage.toString());
 
         await payload.create({
             collection: pagesSlug,
