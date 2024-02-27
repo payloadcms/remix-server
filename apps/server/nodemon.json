@@ -1,6 +1,6 @@
 {
     "verbose": true,
     "ext": "ts",
-    "exec": "cross-env REMIX_ROOT=../web remix dev -c \"tsx src/index.ts\"",
+    "exec": "tsx src/index.ts",
     "watch": ["./src/index.ts", "../cms/src"]
 }

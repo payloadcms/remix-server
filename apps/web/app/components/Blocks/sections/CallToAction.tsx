@@ -18,7 +18,7 @@ export const CallToAction: React.FC<CallToActionProps> = (props) => {
                             <li key={i}>
                                 {typeof button?.page === 'object' && (
                                     <Link
-                                        to={'/' + button?.page?.slug ?? '/'}
+                                        to={button?.page?.slug ? '/' + button?.page?.slug : '/'}
                                         className="cta-button"
                                     >
                                         {button.label}

@@ -1,7 +1,7 @@
-/// <reference types="@remix-run/dev" />
+/// <reference types="vite/client" />
 /// <reference types="@remix-run/node/globals" />
 
-import type { Response } from 'express';
+import type { Response } from 'express/index';
 import type { Payload, User } from '@org/cms';
 
 export interface RemixRequestContext {

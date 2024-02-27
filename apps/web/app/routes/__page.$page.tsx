@@ -1,4 +1,4 @@
-import type { V2_MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from '@remix-run/node';
 import { useMatches, useParams } from '@remix-run/react';
 import { RenderBlocks } from '~/components/Blocks';
 import type { RootLoaderData } from '~/root';
@@ -6,7 +6,7 @@ import { findPageBySlug } from '~/utils';
 
 import type { loader as rootLoader } from '../root';
 
-export const meta: V2_MetaFunction<any, { root: typeof rootLoader }> = ({
+export const meta: MetaFunction<any, { root: typeof rootLoader }> = ({
     matches,
     params,
 }) => {

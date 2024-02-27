@@ -15,9 +15,7 @@
     },
     "scripts": {
         "clean": "rm -rf node_modules build public/build .turbo",
-        "build": "remix build",
-        "dev:explicit": "remix build && run-p \"dev:*\"",
-        "dev:remix": "remix watch",
+        "build": "remix vite:build",
         "lint": "eslint --ext .ts,.tsx,.js,.jsx ./app"
     },
     "dependencies": {
@@ -44,8 +42,9 @@
         "@types/react-dom": "^18.2.19",
         "eslint": "^8.57.0",
         "nodemon": "^3.1.0",
-        "npm-run-all": "^4.1.5",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "vite": "^5.1.4",
+        "vite-tsconfig-paths": "^4.3.1"
     },
     "engines": {
         "node": ">=16"

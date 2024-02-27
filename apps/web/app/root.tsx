@@ -2,13 +2,12 @@ import type { Page, User } from '@org/cms';
 import type {
     LinksFunction,
     LoaderFunction,
-    V2_MetaFunction,
+    MetaFunction,
     TypedResponse,
 } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import {
     Links,
-    LiveReload,
     Meta,
     Outlet,
     Scripts,
@@ -17,27 +16,23 @@ import {
     isRouteErrorResponse,
 } from '@remix-run/react';
 
-import uiStyles from '@org/ui/styles.css';
-import styles from './styles/global.css';
+import uiStyles from '@org/ui/styles.css?url';
+import styles from './styles/global.css?url';
 
-export const meta: V2_MetaFunction = () => {
+export const links: LinksFunction = () => {
+    return [
+        { rel: "stylesheet", href: uiStyles },
+        { rel: "stylesheet", href: styles },
+    ]
+}
+
+export const meta: MetaFunction = () => {
     return [
         { charSet: 'utf-8' },
         { title: 'Payload CMS & Remix Monorepo' },
         { name: 'viewport', content: 'width=device-width,initial-scale=1' }
     ];
 };
-
-export const links: LinksFunction = () => [
-    {
-        rel: 'stylesheet',
-        href: uiStyles,
-    },
-    {
-        rel: 'stylesheet',
-        href: styles,
-    },
-];
 
 export type RootLoaderData = {
     pages: Page[];
@@ -62,7 +57,7 @@ export const loader: LoaderFunction = async ({
         overrideAccess: false,
     });
 
-    return { pages, user };
+    return { pages: pages as unknown as Page[], user };
 };
 
 export default function App() {
@@ -86,7 +81,6 @@ export default function App() {
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />
-                <LiveReload />
             </body>
         </html>
     );
