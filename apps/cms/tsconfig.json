@@ -5,6 +5,8 @@
         "paths": {
             "payload/generated-types": ["./src/payload-types.ts"]
         },
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
     },
     "include": ["src/**/*"]
 }

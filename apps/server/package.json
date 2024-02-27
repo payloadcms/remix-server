@@ -3,9 +3,10 @@
     "description": "Server for running several web applications",
     "version": "1.0.0",
     "license": "MIT",
+    "type": "module",
     "scripts": {
         "clean": "rm -rf node_modules build dist .turbo",
-        "dev": "cross-env PAYLOAD_CONFIG_PATH=../cms/src/config.ts NODE_ENV=development nodemon",
+        "dev": "cross-env PAYLOAD_CONFIG_PATH=../cms/src/config.ts NODE_ENV=development REMIX_ROOT=../web nodemon",
         "build:server": "rm -rf dist/* && tsc",
         "build": "pnpm build:server",
         "serve": "cross-env PAYLOAD_CONFIG_PATH=../cms/dist/config.js NODE_ENV=production node --conditions=serve dist/index.js",
@@ -15,15 +16,24 @@
         "@org/cms": "workspace:*",
         "@org/shared": "workspace:*",
         "@org/web": "workspace:*",
-        "express": "^4.18.2"
+        "compression": "^1.7.4",
+        "express": "^4.18.2",
+        "morgan": "^1.10.0",
+        "source-map-support": "^0.5.21"
     },
     "devDependencies": {
+        "@remix-run/dev": "^1.19.3",
+        "@types/compression": "^1.7.5",
         "@types/express": "^4.17.21",
+        "@types/morgan": "^1.9.9",
         "@types/node": "^18.13.0",
+        "@types/source-map-support": "^0.5.10",
+        "chokidar": "^3.6.0",
         "copyfiles": "^2.4.1",
         "cross-env": "^7.0.3",
         "nodemon": "^3.1.0",
         "ts-node": "^10.9.2",
+        "tsx": "^4.7.1",
         "typescript": "^5.3.3"
     },
     "engines": {

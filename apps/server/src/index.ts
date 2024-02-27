@@ -1,14 +1,21 @@
-import path = require('path');
-import fs = require('fs');
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as url from 'node:url';
 
-import express = require('express');
-import cms = require('@org/cms');
-import shared = require('@org/shared');
-import webExpressAdapter = require('@org/web/express');
+import {
+    createRequestHandler,
+    broadcastDevReady,
+    installGlobals,
+    GetLoadContextFunction,
+} from '@org/web/express';
+import type { RequestHandler, ServerBuild } from '@org/web/express';
+import { dotenv } from '@org/shared';
+import { payload } from '@org/cms';
 
-const { payload } = cms;
-const { dotenv } = shared;
-const { createRequestHandler } = webExpressAdapter;
+import compression from 'compression';
+import express from 'express';
+import morgan from 'morgan';
+import sourceMapSupport from 'source-map-support';
 
 // Loading environment variables, .env > .env.local
 const config = dotenv.config();
@@ -28,7 +35,7 @@ if (fs.existsSync(localEnvFilePath)) {
     }
 }
 
-const PAYLOADCMS_SECRET = process.env.PAYLOADCMS_SECRET ?? "";
+const PAYLOADCMS_SECRET = process.env.PAYLOADCMS_SECRET ?? '';
 const ENVIRONMENT = process.env.NODE_ENV;
 
 // During development this is fine. Conditionalize this for production as needed.
@@ -38,8 +45,51 @@ const WEB_PUBLIC_BUILD_DIR = path.join(
     process.cwd(),
     '../web/public/web/build'
 );
+const WEB_BUILD_PATH = path.join(WEB_BUILD_DIR, 'index.js');
+const WEB_VERSION_PATH = path.join(WEB_BUILD_DIR, 'version.js');
+
+sourceMapSupport.install({
+    retrieveSourceMap: function (source) {
+        const match = source.startsWith('file://');
+        if (match) {
+            const filePath = url.fileURLToPath(source);
+            const sourceMapPath = `${filePath}.map`;
+            if (fs.existsSync(sourceMapPath)) {
+                return {
+                    url: source,
+                    map: fs.readFileSync(sourceMapPath, 'utf8'),
+                };
+            }
+        }
+        return null;
+    },
+});
+installGlobals();
+
+const initialBuild = await reimportServer();
+
+const getLoadContext: GetLoadContextFunction = (req, res) => {
+    return {
+        payload: req.payload,
+        user: req?.user,
+        res,
+    };
+};
+
+const remixHandler =
+    ENVIRONMENT === 'development'
+        ? await createDevRequestHandler(initialBuild)
+        : createRequestHandler({
+              build: initialBuild,
+              mode: ENVIRONMENT,
+              getLoadContext,
+          });
 
 const app = express();
+
+app.use(compression());
+
+// http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
 app.disable('x-powered-by');
 
 // Serving the web static files with different caching strategies
@@ -56,65 +106,66 @@ app.use(
     express.static(WEB_PUBLIC_DIR, { maxAge: '1h', redirect: false })
 );
 
-payload.init({
+app.use(morgan('tiny'));
+
+await payload.init({
     express: app,
     secret: PAYLOADCMS_SECRET,
     onInit: () => {
         payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
-}).then(() => {
-
-    app.use(payload.authenticate);
-    
-    app.all(
-        '*',
-        ENVIRONMENT === 'development'
-            ? (req, res, next) => {
-                  purgeRequireCache();
-    
-                  return createRequestHandler({
-                      build: require(WEB_BUILD_DIR),
-                      mode: ENVIRONMENT,
-                      getLoadContext(req, res) {
-                          return {
-                              payload: req.payload,
-                              user: req?.user,
-                              res,
-                          };
-                      },
-                  })(req, res, next);
-              }
-            : createRequestHandler({
-                  build: require(WEB_BUILD_DIR),
-                  mode: ENVIRONMENT,
-                  getLoadContext(req, res) {
-                      return {
-                          payload: req.payload,
-                          user: req?.user,
-                          res,
-                      };
-                  },
-              })
-    );
-    
-    const port = process.env.PORT || 3000;
-    
-    app.listen(port, () => {
-        console.log(`Express server listening on port ${port}`);
-    });
 });
 
+app.use(payload.authenticate);
 
-function purgeRequireCache() {
-    // purge require cache on requests for "server side HMR" this won't let
-    // you have in-memory objects between requests in development,
-    // alternatively you can set up nodemon/pm2-dev to restart the server on
-    // file changes, but then you'll have to reconnect to databases/etc on each
-    // change. We prefer the DX of this, so we've included it for you by default
+app.all('*', remixHandler);
 
-    for (const key in require.cache) {
-        if (key.startsWith(WEB_BUILD_DIR)) {
-            delete require.cache[key];
-        }
+const port = process.env.PORT || 3000;
+app.listen(port, async () => {
+    console.log(`Express server listening at http://localhost:${port}`);
+
+    if (ENVIRONMENT === 'development') {
+        broadcastDevReady(initialBuild);
     }
+});
+
+async function reimportServer(): Promise<ServerBuild> {
+    const stat = fs.statSync(WEB_BUILD_PATH);
+
+    // convert build path to URL for Windows compatibility with dynamic `import`
+    const BUILD_URL = url.pathToFileURL(WEB_BUILD_PATH).href;
+
+    // use a timestamp query parameter to bust the import cache
+    return import(BUILD_URL + '?t=' + stat.mtimeMs);
 }
+
+async function createDevRequestHandler(
+    initialBuild: ServerBuild
+): Promise<RequestHandler> {
+    let build = initialBuild;
+    async function handleServerUpdate() {
+        // 1. re-import the server build
+        build = await reimportServer();
+        // 2. tell Remix that this app server is now up-to-date and ready
+        broadcastDevReady(build);
+    }
+    const chokidar = await import('chokidar');
+    chokidar
+        .watch(WEB_VERSION_PATH, { ignoreInitial: true })
+        .on('add', handleServerUpdate)
+        .on('change', handleServerUpdate);
+
+    // wrap request handler to make sure its recreated with the latest build for every request
+    return async (req, res, next) => {
+        try {
+            return createRequestHandler({
+                build,
+                mode: ENVIRONMENT,
+                getLoadContext,
+            })(req, res, next);
+        } catch (error) {
+            next(error);
+        }
+    };
+}
+
