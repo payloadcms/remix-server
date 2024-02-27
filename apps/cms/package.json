@@ -27,7 +27,7 @@
     "scripts": {
         "clean": "rm -rf node_modules dist build .turbo",
         "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload build",
-        "build:server": "rm -rf dist/* && tsc",
+        "build:server": "rm -rf dist/* && tsc && tsc-alias",
         "build": "pnpm build:payload && pnpm build:server && pnpm copyfiles",
         "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/ && copyfiles -u 1 \"build/**/*\" ../server/build",
         "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload generate:types",
@@ -54,6 +54,7 @@
         "react": "^18.2.0",
         "react-router-dom": "^5.3.4",
         "ts-node": "^10.9.2",
+        "tsc-alias": "^1.8.8",
         "typescript": "^5.3.3"
     },
     "peerDependencies": {

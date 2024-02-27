@@ -8,5 +8,9 @@
         "module": "ESNext",
         "moduleResolution": "Bundler",
     },
+    "tsc-alias": {
+        "resolveFullPaths": true,
+        "verbose": false
+    },
     "include": ["src/**/*"]
 }
