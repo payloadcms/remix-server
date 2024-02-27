@@ -1,9 +1,24 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["remix.env.d.ts", "express.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist", "build", ".turbo", "public"],
+  "include": [
+    "env.d.ts",
+    "express.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".turbo",
+    "public"
+  ],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2021"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2021"
+    ],
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,9 +27,13 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": [
+        "./app/*"
+      ]
     },
     "noEmit": true,
-    "moduleResolution": "node"
+    "skipLibCheck": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
   }
 }

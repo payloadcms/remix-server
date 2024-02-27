@@ -15,9 +15,7 @@ export const seedPages = async (payload: Payload) => {
             collection: mediaSlug,
             data: {
                 alt: 'Payload',
-            // Payloads incorrectly expects a 'sizes' object here, which should be optional since they are created during upload
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any,
+            },
             filePath: path.resolve(__dirname, './payload.jpg'),
         });
 
@@ -27,8 +25,8 @@ export const seedPages = async (payload: Payload) => {
         });
 
         const publicString = JSON.stringify(home)
-            .replace(/{{IMAGE_ID}}/g, createdMedia.id)
-            .replace(/{{SAMPLE_PAGE_ID}}/g, createdPostsPage.id);
+            .replace(/{{IMAGE_ID}}/g, createdMedia.id.toString())
+            .replace(/{{SAMPLE_PAGE_ID}}/g, createdPostsPage.id.toString());
 
         await payload.create({
             collection: pagesSlug,

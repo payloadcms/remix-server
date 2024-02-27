@@ -3,6 +3,7 @@
     "description": "Payload CMS instance",
     "version": "1.0.0",
     "license": "MIT",
+    "type": "module",
     "types": "./src/index.ts",
     "exports": {
         ".": {
@@ -26,30 +27,35 @@
     "scripts": {
         "clean": "rm -rf node_modules dist build .turbo",
         "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload build",
-        "build:server": "rm -rf dist/* && tsc",
+        "build:server": "rm -rf dist/* && tsc && tsc-alias",
         "build": "pnpm build:payload && pnpm build:server && pnpm copyfiles",
         "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/ && copyfiles -u 1 \"build/**/*\" ../server/build",
         "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload generate:types",
         "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/config.ts payload generate:graphQLSchema",
-        "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src"
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src",
+        "payload": "cross-env PAYLOAD_CONFIG_PATH=src/config.ts payload"
     },
     "dependencies": {
         "@org/ui": "workspace:*",
-        "payload": "^1.6.9"
+        "@payloadcms/bundler-vite": "^0.1.6",
+        "@payloadcms/db-mongodb": "^1.4.3",
+        "@payloadcms/richtext-lexical": "^0.7.0",
+        "payload": "^2.11.2"
     },
     "devDependencies": {
         "@org/shared": "workspace:*",
-        "@types/express": "^4.17.17",
-        "@types/node": "^18.13.0",
-        "@types/react": "^18.0.27",
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.20",
+        "@types/react": "^18.2.59",
         "@types/react-router-dom": "^5.3.3",
         "copyfiles": "^2.4.1",
         "cross-env": "^7.0.3",
-        "nodemon": "^2.0.20",
+        "nodemon": "^3.1.0",
         "react": "^18.2.0",
         "react-router-dom": "^5.3.4",
-        "ts-node": "^10.9.1",
-        "typescript": "^4.9.5"
+        "ts-node": "^10.9.2",
+        "tsc-alias": "^1.8.8",
+        "typescript": "^5.3.3"
     },
     "peerDependencies": {
         "@org/shared": "workspace:*",

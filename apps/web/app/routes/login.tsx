@@ -1,5 +1,4 @@
 import type { ActionFunction } from '@remix-run/node';
-import { Response } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 import { Logo } from '~/components/Logo';

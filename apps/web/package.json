@@ -15,33 +15,30 @@
     },
     "scripts": {
         "clean": "rm -rf node_modules build public/build .turbo",
-        "build": "remix build",
-        "dev": "remix build && run-p \"dev:*\"",
-        "dev:remix": "remix watch",
+        "build": "remix vite:build",
         "lint": "eslint --ext .ts,.tsx,.js,.jsx ./app"
     },
     "dependencies": {
         "@org/ui": "workspace:*",
-        "@remix-run/express": "^1.12.0",
-        "@remix-run/node": "^1.12.0",
-        "@remix-run/react": "^1.12.0",
-        "escape-html": "^1.0.3",
+        "@remix-run/express": "^2.7.2",
+        "@remix-run/node": "^2.7.2",
+        "@remix-run/react": "^2.7.2",
+        "isbot": "^4",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "slate": "^0.90.0"
+        "react-dom": "^18.2.0"
     },
     "devDependencies": {
         "@org/cms": "workspace:*",
-        "@remix-run/dev": "^1.12.0",
-        "@remix-run/eslint-config": "^1.12.0",
-        "@types/escape-html": "^1.0.2",
-        "@types/express": "^4.17.17",
-        "@types/react": "^18.0.27",
-        "@types/react-dom": "^18.0.10",
-        "eslint": "^8.34.0",
-        "nodemon": "^2.0.20",
-        "npm-run-all": "^4.1.5",
-        "typescript": "^4.9.5"
+        "@remix-run/dev": "^2.7.2",
+        "@remix-run/eslint-config": "^2.7.2",
+        "@types/express": "^4.17.21",
+        "@types/react": "^18.2.59",
+        "@types/react-dom": "^18.2.19",
+        "eslint": "^8.57.0",
+        "nodemon": "^3.1.0",
+        "typescript": "^5.3.3",
+        "vite": "^5.1.4",
+        "vite-tsconfig-paths": "^4.3.1"
     },
     "engines": {
         "node": ">=16"

@@ -1,5 +1,5 @@
 import type { Page } from '@org/cms';
-import { RichText } from '../RichText';
+import { RichText } from '@org/ui';
 
 type ContentTypeProps = Page['layout'][0];
 export const Content = (props: ContentTypeProps) => {

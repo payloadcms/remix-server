@@ -5,6 +5,12 @@
         "paths": {
             "payload/generated-types": ["./src/payload-types.ts"]
         },
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+    },
+    "tsc-alias": {
+        "resolveFullPaths": true,
+        "verbose": false
     },
     "include": ["src/**/*"]
 }

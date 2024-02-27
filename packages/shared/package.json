@@ -2,6 +2,7 @@
     "name": "@org/shared",
     "version": "1.0.0",
     "license": "MIT",
+    "type": "module",
     "main": "./src/index.ts",
     "exports": {
         ".": {
@@ -23,6 +24,6 @@
         "lint": "eslint --ext .ts,.js./src"
     },
     "dependencies": {
-        "dotenv": "^16.0.3"
+        "dotenv": "^16.4.5"
     }
 }

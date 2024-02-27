@@ -4,6 +4,7 @@
     "license": "MIT",
     "sideEffects": false,
     "main": "./src/index.tsx",
+    "type": "module",
     "exports": {
         ".": {
             "types": "./src/index.tsx",
@@ -21,11 +22,20 @@
         "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src",
         "prepublishOnly": "pnpm run build"
     },
+    "dependencies": {
+        "@lexical/list": "^0.13.1",
+        "@lexical/rich-text": "^0.13.1",
+        "@payloadcms/richtext-lexical": "^0.7.0",
+        "escape-html": "^1.0.3",
+        "lexical": "^0.13.1"
+    },
     "peerDependencies": {
+        "@remix-run/react": "^2.7.2",
         "react": "^18.2.0"
     },
     "devDependencies": {
-        "@types/react": "^18.0.27",
+        "@types/react": "^18.2.59",
+        "@types/escape-html": "^1.0.4",
         "react": "^18.2.0"
     }
 }

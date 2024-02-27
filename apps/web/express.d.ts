@@ -12,4 +12,6 @@ declare module '@remix-run/express' {
     }): RequestHandler;
 }
 
-export type * from '@remix-run/express';
+export { createRequestHandler } from '@remix-run/express';
+export { broadcastDevReady, installGlobals } from '@remix-run/node';
+export type { ServerBuild } from '@remix-run/node';

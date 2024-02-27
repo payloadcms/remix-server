@@ -1,6 +1,6 @@
 import type { Page } from '@org/cms';
 import { Link } from '@remix-run/react';
-import { RichText } from '../RichText';
+import { RichText } from '@org/ui';
 
 type CallToActionProps = Page['layout'][0];
 
@@ -18,7 +18,7 @@ export const CallToAction: React.FC<CallToActionProps> = (props) => {
                             <li key={i}>
                                 {typeof button?.page === 'object' && (
                                     <Link
-                                        to={'/' + button?.page?.slug ?? '/'}
+                                        to={button?.page?.slug ? '/' + button?.page?.slug : '/'}
                                         className="cta-button"
                                     >
                                         {button.label}
