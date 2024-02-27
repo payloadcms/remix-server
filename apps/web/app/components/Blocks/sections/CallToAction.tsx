@@ -1,6 +1,6 @@
 import type { Page } from '@org/cms';
 import { Link } from '@remix-run/react';
-import { RichText } from '../RichText';
+import { RichText } from '@org/ui';
 
 type CallToActionProps = Page['layout'][0];
 

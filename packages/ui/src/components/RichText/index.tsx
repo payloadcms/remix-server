@@ -1,12 +1,13 @@
-import { serializeLexical } from './serialize'
+import { serializeLexical } from './serialize';
 
-type RichTextProps = JSX.IntrinsicElements['div'] & {
-    content: any;
+type RichTextProps = Omit<JSX.IntrinsicElements['div'], "content"> & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content?: any;
 };
 
 export const RichText = ({ className, content }: RichTextProps) => {
   if (!content) {
-    return null
+    return null;
   }
 
   return (
@@ -17,5 +18,5 @@ export const RichText = ({ className, content }: RichTextProps) => {
         'root' in content &&
         serializeLexical({ nodes: content?.root?.children })}
     </div>
-  )
-}
+  );
+};

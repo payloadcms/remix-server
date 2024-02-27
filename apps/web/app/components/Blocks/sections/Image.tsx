@@ -1,5 +1,5 @@
 import type { Page } from '@org/cms';
-import { RichText } from '../RichText';
+import { RichText } from '@org/ui';
 import { sizes } from './sizes';
 
 type ImageProps = Page['layout'][0]

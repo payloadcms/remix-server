@@ -8,7 +8,7 @@ import type { SerializedElementNode, SerializedLexicalNode, SerializedTextNode }
 
 import escapeHTML from 'escape-html'
 import { Link } from '@remix-run/react'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import {
   IS_BOLD,
