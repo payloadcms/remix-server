@@ -1,43 +1,48 @@
 export default {
-    "layout": [
+    layout: [
         {
-            "blockType": "content" as const,
-            "blockName": "Page Content",
-            "content": [
-                {
-                    "children": [
+            blockType: 'content' as const,
+            blockName: 'Page Content',
+            content: {
+                root: {
+                    type: 'root',
+                    children: [
                         {
-                            "text": "This is a sample page which is only visible to authenticated users."
-                        }
-                    ],
-                    "type": "h3"
-                },
-                {
-                    "children": [
-                        {
-                            "text": ""
-                        },
-                        {
-                            "type": "link",
-                            "url": "/",
-                            "newTab": false,
-                            "children": [
+                            children: [
                                 {
-                                    "text": "Go back home"
-                                }
-                            ]
+                                    text: 'This is a sample page which is only visible to authenticated users.',
+                                    type: 'text',
+                                },
+                            ],
+                            type: 'heading',
+                            tag: 'h3',
                         },
                         {
-                            "text": ""
-                        }
+                            children: [
+                                {
+                                    children: [
+                                        {
+                                            text: 'Go back home',
+                                            type: 'text',
+                                        },
+                                    ],
+                                    type: 'link',
+                                    fields: {
+                                        linkType: 'custom',
+                                        newTab: false,
+                                        url: '/',
+                                    },
+                                },
+                            ],
+                            type: 'paragraph',
+                        },
                     ],
-                    "type": "p"
-                }
-            ]
-        }
+                },
+            },
+        },
     ],
-    "title": "Posts",
-    "public": false,
-    "slug": "posts" as const,
-    "meta": {}
-}
+    title: 'Posts',
+    public: false,
+    slug: 'posts' as const,
+    meta: {},
+};
